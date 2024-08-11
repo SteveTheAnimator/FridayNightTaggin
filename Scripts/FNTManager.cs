@@ -10,5 +10,8 @@ namespace FridayNightTaggin.Scripts
         public static FNTManager instance;
         public SongManager songManager;
         public GameObject FNTManagerObject;
+        public AssetBundle bundle;
+        public bool PlayerOne = false;
+        public bool PlayerTwo = false;
     }
 }
