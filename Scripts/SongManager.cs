@@ -14,15 +14,16 @@ namespace FridayNightTaggin.Scripts
     {
         public List<GameObject> notes = new List<GameObject>();
         public float SongSpeed = 1;
+        public FNTManager manager = null;
 
         [PunRPC]
         public void SpawnNote(int noteID, int playerID)
         {
-            GameObject obj = FNTManager.instance.bundle.LoadAsset<GameObject>("ArrowPrefab");
+            GameObject obj = manager.bundle.LoadAsset<GameObject>("ArrowPrefab");
             GameObject arrow;
             arrow = Instantiate(obj);
 
-            arrow.transform.position = FNTManager.instance.FNTManagerObject.transform.GetChild(playerID).transform.GetChild(noteID + 4).transform.position;
+            arrow.transform.position = manager.FNTManagerObject.transform.GetChild(playerID).transform.GetChild(noteID + 4).transform.position;
             notes.Add(arrow);
         }
 
@@ -83,13 +84,13 @@ namespace FridayNightTaggin.Scripts
         {
             int returnthis = 0;
 
-            if(FNTManager.instance.PlayerOne)
+            if(manager.PlayerOne)
             {
                 returnthis= 0;
             }
             else
             {
-                if(FNTManager.instance.PlayerTwo)
+                if(manager.PlayerTwo)
                 {
                     returnthis= 1;
                 }

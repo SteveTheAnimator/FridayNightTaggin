@@ -54,9 +54,9 @@ namespace FridayNightTaggin
             FNTManager.transform.rotation = Quaternion.Euler(0f, 5.66356087f, 0f);
             FNTManager.AddComponent<Scripts.FNTManager>();
             FNTManager.AddComponent<Scripts.SongManager>();
-            Scripts.FNTManager.instance.FNTManagerObject = FNTManager;
-            Scripts.FNTManager.instance.songManager = FNTManager.GetComponent<Scripts.SongManager>();
-            Scripts.FNTManager.instance.bundle = bundle;
+            FNTManager.GetComponent<Scripts.FNTManager>().FNTManagerObject = FNTManager;
+            FNTManager.GetComponent<Scripts.FNTManager>().songManager = FNTManager.GetComponent<Scripts.SongManager>();
+            FNTManager.GetComponent<Scripts.FNTManager>().bundle = bundle;
             try
             {
                 ThirdPersonCamera = GameObject.Find("Player Objects/Third Person Camera/Shoulder Camera")?.GetComponent<Camera>();
@@ -76,7 +76,13 @@ namespace FridayNightTaggin
 
         void Update()
         {
-            /* Person Checker */
+            /* Null Checking */
+            Debug.Log(FNTManager == null ? "FNTManager is null" : "FNTManager is not null");
+            Debug.Log(ThirdPersonCamera == null ? "ThirdPersonCamera is null" : "ThirdPersonCamera is not null");
+            Debug.Log(Cinemachinecamera == null ? "Cinemachinecamera is null" : "Cinemachinecamera is not null");
+            Debug.Log(FNTManager.GetComponent<Scripts.FNTManager>() == null ? "FNTManager is null" : "FNTManager is not null"); // MYY WAYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
+
+            /* Networked Stuff */
             if (inModdedRoom)
             {
                 if (!isPlayerTwo)
@@ -93,7 +99,7 @@ namespace FridayNightTaggin
 
                             FNTManager.transform.GetChild(0).GetComponent<Renderer>().material = TakenMaterial;
 
-                            Scripts.FNTManager.instance.PlayerOne = true;
+                            FNTManager.GetComponent<Scripts.FNTManager>().PlayerOne = true;
 
                             ThirdPersonCamera.gameObject.transform.parent = FNTManager.transform.GetChild(2).GetChild(2).transform;
                             ThirdPersonCamera.gameObject.transform.localPosition = Vector3.zero;
@@ -136,7 +142,7 @@ namespace FridayNightTaggin
 
                             FNTManager.transform.GetChild(1).GetComponent<Renderer>().material = TakenMaterial;
 
-                            Scripts.FNTManager.instance.PlayerTwo = true;
+                            FNTManager.GetComponent<Scripts.FNTManager>().PlayerTwo = true;
 
                             ThirdPersonCamera.gameObject.transform.parent = FNTManager.transform.GetChild(2).GetChild(2).transform;
                             ThirdPersonCamera.gameObject.transform.localPosition = Vector3.zero;
@@ -191,7 +197,10 @@ namespace FridayNightTaggin
                     }
                     if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
                     {
-                        GorillaTagger.Instance.StartCoroutine(Scripts.FNTManager.instance.songManager.PlaySong(0));
+                        if (FNTManager.GetComponent<Scripts.FNTManager>().songManager != null)
+                        {
+                            GorillaTagger.Instance.StartCoroutine(FNTManager.GetComponent<Scripts.FNTManager>().songManager.PlaySong(-1));
+                        }
                     }
                 }
                 if(isPlayerTwo)
@@ -217,7 +226,10 @@ namespace FridayNightTaggin
                     }
                     if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
                     {
-                        GorillaTagger.Instance.StartCoroutine(Scripts.FNTManager.instance.songManager.PlaySong(0));
+                        if (FNTManager.GetComponent<Scripts.FNTManager>().songManager != null)
+                        {
+                            GorillaTagger.Instance.StartCoroutine(FNTManager.GetComponent<Scripts.FNTManager>().songManager.PlaySong(-1));
+                        }
                     }
                 }
             }
