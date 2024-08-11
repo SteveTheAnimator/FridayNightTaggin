@@ -82,21 +82,25 @@ namespace FridayNightTaggin.Scripts
 
         public int WhatIDAmI()
         {
+            if (manager == null)
+            {
+                Debug.LogError("Manager is not assigned!");
+                return 0;
+            }
+
             int returnthis = 0;
 
-            if(manager.PlayerOne)
+            if (manager.PlayerOne)
             {
-                returnthis= 0;
+                returnthis = 0;
             }
-            else
+            else if (manager.PlayerTwo)
             {
-                if(manager.PlayerTwo)
-                {
-                    returnthis= 1;
-                }
+                returnthis = 1;
             }
 
             return returnthis;
         }
+
     }
 }

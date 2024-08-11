@@ -56,6 +56,7 @@ namespace FridayNightTaggin
             FNTManager.AddComponent<Scripts.SongManager>();
             FNTManager.GetComponent<Scripts.FNTManager>().FNTManagerObject = FNTManager;
             FNTManager.GetComponent<Scripts.FNTManager>().songManager = FNTManager.GetComponent<Scripts.SongManager>();
+            FNTManager.GetComponent<Scripts.SongManager>().manager = FNTManager.GetComponent<Scripts.FNTManager>();
             FNTManager.GetComponent<Scripts.FNTManager>().bundle = bundle;
             try
             {
