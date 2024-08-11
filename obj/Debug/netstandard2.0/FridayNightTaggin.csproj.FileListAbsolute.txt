@@ -1,0 +1,5 @@
+C:\Users\harlo\source\repos\FridayNightTaggin\FridayNightTaggin\obj\Debug\netstandard2.0\FridayNightTaggin.csproj.AssemblyReference.cache
+C:\Users\harlo\source\repos\FridayNightTaggin\FridayNightTaggin\obj\Debug\netstandard2.0\FridayNightTaggin.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\harlo\source\repos\FridayNightTaggin\FridayNightTaggin\obj\Debug\netstandard2.0\FridayNightTaggin.AssemblyInfoInputs.cache
+C:\Users\harlo\source\repos\FridayNightTaggin\FridayNightTaggin\obj\Debug\netstandard2.0\FridayNightTaggin.AssemblyInfo.cs
+C:\Users\harlo\source\repos\FridayNightTaggin\FridayNightTaggin\obj\Debug\netstandard2.0\FridayNightTaggin.csproj.CoreCompileInputs.cache
