@@ -7,6 +7,7 @@ using Photon.Realtime;
 using Photon.Pun;
 using Photon.Voice;
 using System.Collections;
+using GorillaLocomotion;
 
 namespace FridayNightTaggin.Scripts
 {
@@ -15,6 +16,7 @@ namespace FridayNightTaggin.Scripts
         public List<GameObject> notes = new List<GameObject>();
         public float SongSpeed = 1;
         public FNTManager manager = null;
+        public bool isInSong = false;
 
         [PunRPC]
         public void SpawnNote(int noteID, int playerID)
@@ -40,43 +42,51 @@ namespace FridayNightTaggin.Scripts
         {
             if(songID == -1) // test song, make not accessable when mod is fully public (yes you can access this right now you stinky skid)
             {
+                if(!isInSong)
+                {
+                    isInSong = true;
+                }
                 Debug.Log("stink");
-                GorillaTagger.Instance.myVRRig.RPC("SpawnNote", RpcTarget.All, new object[]
-                {
-                    "2",
-                    WhatIDAmI()
-                });
-                yield return new WaitForSeconds(6);
-                GorillaTagger.Instance.myVRRig.RPC("SpawnNote", RpcTarget.All, new object[]
-                {
-                    "3",
-                    WhatIDAmI()
-                });
-                yield return new WaitForSeconds(6);
-                GorillaTagger.Instance.myVRRig.RPC("SpawnNote", RpcTarget.All, new object[]
-                {
-                    "2",
-                    WhatIDAmI()
-                });
-                yield return new WaitForSeconds(6);
-                GorillaTagger.Instance.myVRRig.RPC("SpawnNote", RpcTarget.All, new object[]
-                {
-                    "4",
-                    WhatIDAmI()
-                });
-                yield return new WaitForSeconds(6);
-                GorillaTagger.Instance.myVRRig.RPC("SpawnNote", RpcTarget.All, new object[]
-                {
-                    "1",
-                    WhatIDAmI()
-                });
-                yield return new WaitForSeconds(6);
-                GorillaTagger.Instance.myVRRig.RPC("SpawnNote", RpcTarget.All, new object[]
-                {
-                    "3",
-                    WhatIDAmI()
-                });
-                yield return new WaitForSeconds(6);
+                manager.photonView.RPC("SpawnNote", RpcTarget.All, 2, WhatIDAmI());
+                yield return new WaitForSeconds(1);
+                manager.photonView.RPC("SpawnNote", RpcTarget.All, 4, WhatIDAmI());
+                yield return new WaitForSeconds(1);
+                manager.photonView.RPC("SpawnNote", RpcTarget.All, 2, WhatIDAmI());
+                yield return new WaitForSeconds(1);
+                manager.photonView.RPC("SpawnNote", RpcTarget.All, 4, WhatIDAmI());
+                yield return new WaitForSeconds(1);
+                manager.photonView.RPC("SpawnNote", RpcTarget.All, 2, WhatIDAmI());
+                yield return new WaitForSeconds(1);
+                manager.photonView.RPC("SpawnNote", RpcTarget.All, 4, WhatIDAmI());
+                yield return new WaitForSeconds(1);
+                manager.photonView.RPC("SpawnNote", RpcTarget.All, 2, WhatIDAmI());
+                yield return new WaitForSeconds(1);
+                manager.photonView.RPC("SpawnNote", RpcTarget.All, 4, WhatIDAmI());
+                yield return new WaitForSeconds(1);
+                manager.photonView.RPC("SpawnNote", RpcTarget.All, 2, WhatIDAmI());
+                yield return new WaitForSeconds(1);
+                manager.photonView.RPC("SpawnNote", RpcTarget.All, 4, WhatIDAmI());
+                yield return new WaitForSeconds(1);
+                manager.photonView.RPC("SpawnNote", RpcTarget.All, 2, WhatIDAmI());
+                yield return new WaitForSeconds(1);
+                manager.photonView.RPC("SpawnNote", RpcTarget.All, 4, WhatIDAmI());
+                yield return new WaitForSeconds(1);
+                manager.photonView.RPC("SpawnNote", RpcTarget.All, 2, WhatIDAmI());
+                yield return new WaitForSeconds(1);
+                manager.photonView.RPC("SpawnNote", RpcTarget.All, 4, WhatIDAmI());
+                yield return new WaitForSeconds(1);
+                manager.photonView.RPC("SpawnNote", RpcTarget.All, 2, WhatIDAmI());
+                yield return new WaitForSeconds(1);
+                manager.photonView.RPC("SpawnNote", RpcTarget.All, 4, WhatIDAmI());
+                yield return new WaitForSeconds(1);
+                manager.photonView.RPC("SpawnNote", RpcTarget.All, 2, WhatIDAmI());
+                yield return new WaitForSeconds(1);
+                manager.photonView.RPC("SpawnNote", RpcTarget.All, 4, WhatIDAmI());
+                yield return new WaitForSeconds(1);
+                manager.photonView.RPC("SpawnNote", RpcTarget.All, 2, WhatIDAmI());
+                yield return new WaitForSeconds(1);
+                manager.photonView.RPC("SpawnNote", RpcTarget.All, 4, WhatIDAmI());
+                yield return new WaitForSeconds(1);
             }
         }
 

@@ -58,6 +58,7 @@ namespace FridayNightTaggin
             FNTManager.GetComponent<Scripts.FNTManager>().songManager = FNTManager.GetComponent<Scripts.SongManager>();
             FNTManager.GetComponent<Scripts.SongManager>().manager = FNTManager.GetComponent<Scripts.FNTManager>();
             FNTManager.GetComponent<Scripts.FNTManager>().bundle = bundle;
+            FNTManager.GetComponent<Scripts.FNTManager>().photonView = FNTManager.AddComponent<PhotonView>();
             try
             {
                 ThirdPersonCamera = GameObject.Find("Player Objects/Third Person Camera/Shoulder Camera")?.GetComponent<Camera>();
@@ -197,12 +198,13 @@ namespace FridayNightTaggin
                         }
                     }
                     if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
-                    {
-                        if (FNTManager.GetComponent<Scripts.FNTManager>().songManager != null)
+                    {if (FNTManager.GetComponent<Scripts.FNTManager>().songManager != null)
                         {
-                            GorillaTagger.Instance.StartCoroutine(FNTManager.GetComponent<Scripts.FNTManager>().songManager.PlaySong(-1));
+                            if (!FNTManager.GetComponent<Scripts.FNTManager>().songManager.isInSong)
+                            { GorillaTagger.Instance.StartCoroutine(FNTManager.GetComponent<Scripts.FNTManager>().songManager.PlaySong(-1)); }
                         }
-                    }
+                        if (!FNTManager.GetComponent<Scripts.FNTManager>().songManager.isInSong)
+                        { GorillaTagger.Instance.StartCoroutine(FNTManager.GetComponent<Scripts.FNTManager>().songManager.PlaySong(-1)); }}
                 }
                 if(isPlayerTwo)
                 {
@@ -229,8 +231,11 @@ namespace FridayNightTaggin
                     {
                         if (FNTManager.GetComponent<Scripts.FNTManager>().songManager != null)
                         {
-                            GorillaTagger.Instance.StartCoroutine(FNTManager.GetComponent<Scripts.FNTManager>().songManager.PlaySong(-1));
+                            if (!FNTManager.GetComponent<Scripts.FNTManager>().songManager.isInSong)
+                            { GorillaTagger.Instance.StartCoroutine(FNTManager.GetComponent<Scripts.FNTManager>().songManager.PlaySong(-1)); }
                         }
+                        if (!FNTManager.GetComponent<Scripts.FNTManager>().songManager.isInSong)
+                        { GorillaTagger.Instance.StartCoroutine(FNTManager.GetComponent<Scripts.FNTManager>().songManager.PlaySong(-1)); }
                     }
                 }
             }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Photon.Pun;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
@@ -12,5 +13,6 @@ namespace FridayNightTaggin.Scripts
         public AssetBundle bundle;
         public bool PlayerOne = false;
         public bool PlayerTwo = false;
+        public PhotonView photonView;
     }
 }
