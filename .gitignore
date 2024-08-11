@@ -52,4 +52,8 @@ Mkfile.old
 dkms.conf
 
 # Other
+<<<<<<< HEAD
 *.vs/
+=======
+*.vs
+>>>>>>> f6bbe89e7bb48d76b46825f0e7f71ed40926cda3
