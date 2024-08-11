@@ -52,6 +52,10 @@ namespace FridayNightTaggin
             FNTManager.SetActive(false);
             FNTManager.transform.position = new Vector3(-62.645f, 3.9253f, -68.426f);
             FNTManager.transform.rotation = Quaternion.Euler(0f, 5.66356087f, 0f);
+            FNTManager.AddComponent<Scripts.FNTManager>();
+            FNTManager.AddComponent<Scripts.SongManager>();
+            FNTManager.GetComponent<Scripts.FNTManager>().FNTManagerObject = FNTManager;
+            FNTManager.GetComponent<Scripts.FNTManager>().songManager = FNTManager.GetComponent<Scripts.SongManager>();
             try
             {
                 ThirdPersonCamera = GameObject.Find("Player Objects/Third Person Camera/Shoulder Camera")?.GetComponent<Camera>();
