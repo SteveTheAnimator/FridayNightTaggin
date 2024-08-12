@@ -20,7 +20,7 @@ namespace FridayNightTaggin.Scripts
         public bool isInSong = false;
         public void OnEvent(EventData photonEvent)
         {
-            if (photonEvent.Code == 199)
+            if (photonEvent.Code == 245)
             {
                 object[] data = (object[])photonEvent.CustomData;
                 Photon.Realtime.Player player = (Photon.Realtime.Player)data[1];
@@ -91,7 +91,7 @@ namespace FridayNightTaggin.Scripts
         {
             object[] content = new object[] { noteid, PhotonNetwork.LocalPlayer};
             RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };
-            PhotonNetwork.RaiseEvent(199, content, raiseEventOptions, SendOptions.SendReliable);
+            PhotonNetwork.RaiseEvent(245, content, raiseEventOptions, SendOptions.SendReliable);
         }
 
         public int WhatIDAmI()
