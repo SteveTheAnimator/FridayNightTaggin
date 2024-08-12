@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FridayNightTaggin")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ab12e5f062f7557b94987c9b6a2b26bcd38ea486")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e8ff9596d3b011ac6569d9d7f9a2730b46fc4e66")]
 [assembly: System.Reflection.AssemblyProductAttribute("FridayNightTaggin")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FridayNightTaggin")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

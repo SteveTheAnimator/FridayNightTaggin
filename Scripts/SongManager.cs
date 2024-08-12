@@ -18,9 +18,18 @@ namespace FridayNightTaggin.Scripts
         public float SongSpeed = 1;
         public FNTManager manager = null;
         public bool isInSong = false;
+        private void Start() // im gonna kill myself if this shit does not work istg
+        {
+            PhotonNetwork.AddCallbackTarget(this);
+        }
+
+        private void OnDestroy()
+        {
+            PhotonNetwork.RemoveCallbackTarget(this);
+        }
         public void OnEvent(EventData photonEvent)
         {
-            if (photonEvent.Code == 245)
+            if (photonEvent.Code == 73)
             {
                 object[] data = (object[])photonEvent.CustomData;
                 Photon.Realtime.Player player = (Photon.Realtime.Player)data[1];
@@ -91,7 +100,7 @@ namespace FridayNightTaggin.Scripts
         {
             object[] content = new object[] { noteid, PhotonNetwork.LocalPlayer};
             RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };
-            PhotonNetwork.RaiseEvent(245, content, raiseEventOptions, SendOptions.SendReliable);
+            PhotonNetwork.RaiseEvent(73, content, raiseEventOptions, SendOptions.SendReliable);
         }
 
         public int WhatIDAmI()
