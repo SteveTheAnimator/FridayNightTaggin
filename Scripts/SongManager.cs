@@ -41,10 +41,12 @@ namespace FridayNightTaggin.Scripts
                 if (player.CustomProperties.ContainsKey("FNTIsSelected1") && player.CustomProperties.ContainsValue("true"))
                 {
                     arrow.transform.position = manager.FNTManagerObject.transform.GetChild(0).transform.GetChild(noteid - 1 + 4).transform.position;
+                    arrow.transform.GetChild(noteid - 1).gameObject.SetActive(true);
                 }
                 if (player.CustomProperties.ContainsKey("FNTIsSelected2") && player.CustomProperties.ContainsValue("true"))
                 {
                     arrow.transform.position = manager.FNTManagerObject.transform.GetChild(1).transform.GetChild(noteid - 1 + 4).transform.position;
+                    arrow.transform.GetChild(noteid - 1).gameObject.SetActive(true);
                 }
             }
         }
