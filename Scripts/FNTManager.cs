@@ -13,6 +13,5 @@ namespace FridayNightTaggin.Scripts
         public AssetBundle bundle;
         public bool PlayerOne = false;
         public bool PlayerTwo = false;
-        public PhotonView photonView;
     }
 }

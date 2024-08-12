@@ -8,25 +8,36 @@ using Photon.Pun;
 using Photon.Voice;
 using System.Collections;
 using GorillaLocomotion;
+using ExitGames.Client.Photon;
+using System.Runtime.InteropServices.ComTypes;
 
 namespace FridayNightTaggin.Scripts
 {
-    internal class SongManager : MonoBehaviour
+    internal class SongManager : MonoBehaviour, IOnEventCallback
     {
         public float SongSpeed = 1;
         public FNTManager manager = null;
         public bool isInSong = false;
-
-        [PunRPC]
-        public void SpawnNote(int noteID, int playerID)
+        public void OnEvent(EventData photonEvent)
         {
-            Debug.Log("you smell");
+            if (photonEvent.Code == 199)
+            {
+                object[] data = (object[])photonEvent.CustomData;
+                Photon.Realtime.Player player = (Photon.Realtime.Player)data[1];
+                int noteid = (int)data[0];
 
-            GameObject obj = manager.bundle.LoadAsset<GameObject>("ArrowPrefab");
-            GameObject arrow;
-            arrow = Instantiate(obj);
-
-            arrow.transform.position = manager.FNTManagerObject.transform.GetChild(WhatIDAmI()).transform.GetChild(noteID -1 + 4).transform.position;
+                GameObject obj = manager.bundle.LoadAsset<GameObject>("ArrowPrefab");
+                GameObject arrow;
+                arrow = Instantiate(obj);
+                if (player.CustomProperties.ContainsKey("FNTIsSelected1") && player.CustomProperties.ContainsValue("true"))
+                {
+                    arrow.transform.position = manager.FNTManagerObject.transform.GetChild(0).transform.GetChild(noteid - 1 + 4).transform.position;
+                }
+                if (player.CustomProperties.ContainsKey("FNTIsSelected2") && player.CustomProperties.ContainsValue("true"))
+                {
+                    arrow.transform.position = manager.FNTManagerObject.transform.GetChild(1).transform.GetChild(noteid - 1 + 4).transform.position;
+                }
+            }
         }
 
         public void Update()
@@ -43,47 +54,44 @@ namespace FridayNightTaggin.Scripts
                     isInSong = true;
                 }
                 Debug.Log("stink");
-                manager.photonView.RPC("SpawnNote", RpcTarget.All, 2, WhatIDAmI());
+                SpawnNote(1);
                 yield return new WaitForSeconds(1);
-                manager.photonView.RPC("SpawnNote", RpcTarget.All, 4, WhatIDAmI());
+                SpawnNote(2);
                 yield return new WaitForSeconds(1);
-                manager.photonView.RPC("SpawnNote", RpcTarget.All, 2, WhatIDAmI());
+                SpawnNote(3);
                 yield return new WaitForSeconds(1);
-                manager.photonView.RPC("SpawnNote", RpcTarget.All, 4, WhatIDAmI());
+                SpawnNote(1);
                 yield return new WaitForSeconds(1);
-                manager.photonView.RPC("SpawnNote", RpcTarget.All, 2, WhatIDAmI());
+                SpawnNote(2);
                 yield return new WaitForSeconds(1);
-                manager.photonView.RPC("SpawnNote", RpcTarget.All, 4, WhatIDAmI());
+                SpawnNote(3);
                 yield return new WaitForSeconds(1);
-                manager.photonView.RPC("SpawnNote", RpcTarget.All, 2, WhatIDAmI());
+                SpawnNote(1);
                 yield return new WaitForSeconds(1);
-                manager.photonView.RPC("SpawnNote", RpcTarget.All, 4, WhatIDAmI());
+                SpawnNote(2);
                 yield return new WaitForSeconds(1);
-                manager.photonView.RPC("SpawnNote", RpcTarget.All, 2, WhatIDAmI());
+                SpawnNote(3);
                 yield return new WaitForSeconds(1);
-                manager.photonView.RPC("SpawnNote", RpcTarget.All, 4, WhatIDAmI());
+                SpawnNote(1);
                 yield return new WaitForSeconds(1);
-                manager.photonView.RPC("SpawnNote", RpcTarget.All, 2, WhatIDAmI());
+                SpawnNote(2);
                 yield return new WaitForSeconds(1);
-                manager.photonView.RPC("SpawnNote", RpcTarget.All, 4, WhatIDAmI());
+                SpawnNote(3);
                 yield return new WaitForSeconds(1);
-                manager.photonView.RPC("SpawnNote", RpcTarget.All, 2, WhatIDAmI());
+                SpawnNote(1);
                 yield return new WaitForSeconds(1);
-                manager.photonView.RPC("SpawnNote", RpcTarget.All, 4, WhatIDAmI());
+                SpawnNote(2);
                 yield return new WaitForSeconds(1);
-                manager.photonView.RPC("SpawnNote", RpcTarget.All, 2, WhatIDAmI());
-                yield return new WaitForSeconds(1);
-                manager.photonView.RPC("SpawnNote", RpcTarget.All, 4, WhatIDAmI());
-                yield return new WaitForSeconds(1);
-                manager.photonView.RPC("SpawnNote", RpcTarget.All, 2, WhatIDAmI());
-                yield return new WaitForSeconds(1);
-                manager.photonView.RPC("SpawnNote", RpcTarget.All, 4, WhatIDAmI());
-                yield return new WaitForSeconds(1);
-                manager.photonView.RPC("SpawnNote", RpcTarget.All, 2, WhatIDAmI());
-                yield return new WaitForSeconds(1);
-                manager.photonView.RPC("SpawnNote", RpcTarget.All, 4, WhatIDAmI());
+                SpawnNote(3);
                 yield return new WaitForSeconds(1);
             }
+        }
+
+        public void SpawnNote(int noteid)
+        {
+            object[] content = new object[] { noteid, PhotonNetwork.LocalPlayer};
+            RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };
+            PhotonNetwork.RaiseEvent(199, content, raiseEventOptions, SendOptions.SendReliable);
         }
 
         public int WhatIDAmI()
