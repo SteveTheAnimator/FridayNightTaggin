@@ -13,7 +13,6 @@ namespace FridayNightTaggin.Scripts
 {
     internal class SongManager : MonoBehaviour
     {
-        public List<GameObject> notes = new List<GameObject>();
         public float SongSpeed = 1;
         public FNTManager manager = null;
         public bool isInSong = false;
@@ -21,21 +20,18 @@ namespace FridayNightTaggin.Scripts
         [PunRPC]
         public void SpawnNote(int noteID, int playerID)
         {
+            Debug.Log("you smell");
+
             GameObject obj = manager.bundle.LoadAsset<GameObject>("ArrowPrefab");
             GameObject arrow;
             arrow = Instantiate(obj);
 
-            arrow.transform.position = manager.FNTManagerObject.transform.GetChild(playerID).transform.GetChild(noteID + 4).transform.position;
-            notes.Add(arrow);
+            arrow.transform.position = manager.FNTManagerObject.transform.GetChild(WhatIDAmI()).transform.GetChild(noteID -1 + 4).transform.position;
         }
 
         public void Update()
         {
-            foreach(GameObject note in notes) 
-            {
-                Vector3 v3 = new Vector3(note.transform.position.x, note.transform.position.y + SongSpeed, note.transform.position.z);
-                note.transform.position = v3;
-            }
+            // sigma
         }
 
         public IEnumerator PlaySong(int songID)
@@ -111,6 +107,5 @@ namespace FridayNightTaggin.Scripts
 
             return returnthis;
         }
-
     }
 }

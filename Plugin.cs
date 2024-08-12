@@ -59,6 +59,7 @@ namespace FridayNightTaggin
             FNTManager.GetComponent<Scripts.SongManager>().manager = FNTManager.GetComponent<Scripts.FNTManager>();
             FNTManager.GetComponent<Scripts.FNTManager>().bundle = bundle;
             FNTManager.GetComponent<Scripts.FNTManager>().photonView = FNTManager.AddComponent<PhotonView>();
+            FNTManager.GetComponent<Scripts.FNTManager>().photonView.ViewID = 128;
             try
             {
                 ThirdPersonCamera = GameObject.Find("Player Objects/Third Person Camera/Shoulder Camera")?.GetComponent<Camera>();
